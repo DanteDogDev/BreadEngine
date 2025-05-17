@@ -35,5 +35,18 @@ private:
 
   static constexpr int OPENGL_MAJOR = 4;
   static constexpr int OPENGL_MINOR = 6;
+
+  static void ErrorCallback(int error, const char* description);
+};
+
+class WindowException : std::exception {
+public:
+  WindowException(int error, const char* description);
+  int error;
+  const char* description;
+  std::string message;
+
+  [[nodiscard]]
+  const char* what() const noexcept override;
 };
 }

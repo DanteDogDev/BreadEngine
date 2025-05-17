@@ -1,35 +1,36 @@
 #include "engine.hpp"
 
+#include <EventSystem/eventSystem.hpp>
 #include <Interface/window.hpp>
 #include <Utils/log.hpp>
-#include <EventSystem/eventSystem.hpp>
 
 namespace toast {
-  void Engine::Run(int argc, char** argv) {
-    Init();
-    while (!m_window->ShouldClose()) {
-      event::EventSystem::PollEvents();
-      m_window->HandleInput();
+void Engine::Run(int argc, char** argv) {
+  Init();
+  while (!m_window->ShouldClose()) {
+    event::EventSystem::PollEvents();
+    m_window->HandleInput();
 
-      Tick();
-      Render();
+    Tick();
+    Render();
 
-      m_window->Tick();
-    }
-    Close();
+    m_window->Tick();
   }
-  void Engine::Init() {
-    Log::Init();
-    TOAST_INFO("Initializing Toast Engine...");
+  Close();
+}
 
-    m_window = std::make_unique<interface::Window>();
-  }
+void Engine::Init() {
+  Log::Init();
+  TOAST_INFO("Initializing Toast Engine...");
 
-  void Engine::Tick() {
-  }
-  void Engine::Render() {
-  }
-  void Engine::Close() {
-    m_window.release();
-  }
+  m_window = std::make_unique<interface::Window>();
+}
+
+void Engine::Tick() { }
+
+void Engine::Render() { }
+
+void Engine::Close() {
+  m_window.reset();
+}
 }
