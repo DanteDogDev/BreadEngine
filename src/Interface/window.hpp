@@ -19,7 +19,7 @@ struct WindowProps {
 
 class TOAST_API Window {
 public:
-  Window(unsigned width = 800, unsigned height = 600, const std::string& name = "Toast Engine");
+  Window(unsigned width = 800, unsigned height = 600, const std::string& name = "ToastEngine");
   ~Window();
 
   [[nodiscard]]

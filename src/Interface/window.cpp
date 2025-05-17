@@ -8,9 +8,6 @@
 namespace interface {
 
 Window::Window(unsigned width, unsigned height, const std::string& name) {
-  TOAST_TRACE("Creating Window");
-  glfwSetErrorCallback(ErrorCallback);
-
   m_properties.name = name;
   m_properties.width = width;
   m_properties.height = height;
@@ -18,6 +15,7 @@ Window::Window(unsigned width, unsigned height, const std::string& name) {
   TOAST_ASSERT(glfwInit(), "Couldn't initialize GLFW");
   TOAST_INFO("Creating window {0} ({1}, {2})", m_properties.name, m_properties.width, m_properties.height);
 
+  glfwSetErrorCallback(ErrorCallback);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, OPENGL_MAJOR);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, OPENGL_MINOR);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -55,6 +53,7 @@ bool Window::ShouldClose() const {
 void Window::Tick() {
   glfwSwapBuffers(m_glfwWindow);
   glfwPollEvents();
+  HandleInput();    // TODO: TEMP GET RID OF LATER
 }
 
 void Window::HandleInput() const {

@@ -6,13 +6,29 @@
 
 #pragma once
 
+#include "EventSystem/listener.hpp"
+
+struct GLFWwindow;
+using GLADloadfunc = void (*(*)(const char* name))();
+
+namespace event {
+struct FrameBufferResize;
+}
+
 namespace renderer {
 class TOAST_API OpenGL {
+public:
+  OpenGL(GLADloadfunc proc_addr);
   void Init();
-  void Resize(int width, int height);
+  static bool Resize(event::FrameBufferResize* event);
   void BeginFrame();
   void RenderFrame(/*world context*/);
   void EndFrame();
   void Cleanup();
+
+private:
+  event::Listener m_listener;
+  unsigned int m_vertexBufferObj {};
+  unsigned int m_vertexArrayObj {};
 };
 }

@@ -8,7 +8,7 @@
 
 class TOAST_API Log {
 public:
-  static void Init();
+  static void Init(spdlog::level::level_enum level = spdlog::level::trace);
 
   enum Level : char {
     Trace = 0,

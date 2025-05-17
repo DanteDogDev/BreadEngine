@@ -3,6 +3,8 @@
 
 #include "log.hpp"
 
+#include "spdlog/common.h"
+
 #include <spdlog/async.h>
 #include <spdlog/async_logger.h>
 #include <spdlog/sinks/basic_file_sink.h>
@@ -11,7 +13,7 @@
 std::shared_ptr<spdlog::logger> Log::m_engineLogger;
 std::shared_ptr<spdlog::logger> Log::m_clientLogger;
 
-void Log::Init() {
+void Log::Init(spdlog::level::level_enum level) {
   // Create and configure sinks (synchronous)
   auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_st>();
   console_sink->set_pattern("%^[%n] %v%$");
@@ -24,12 +26,12 @@ void Log::Init() {
 
   // Create engine logger
   m_engineLogger = std::make_shared<spdlog::logger>("TOAST", spdlog::sinks_init_list { console_sink, file_sink });
-  m_engineLogger->set_level(spdlog::level::trace);
+  m_engineLogger->set_level(level);
   spdlog::register_logger(m_engineLogger);
 
   // Create client logger
   m_clientLogger = std::make_shared<spdlog::logger>("GAME", spdlog::sinks_init_list { console_sink, file_sink });
-  m_clientLogger->set_level(spdlog::level::trace);
+  m_clientLogger->set_level(level);
   spdlog::register_logger(m_clientLogger);
 }
 

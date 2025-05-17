@@ -9,6 +9,7 @@
 #pragma once
 
 #include "Interface/window.hpp"
+#include "Renderer/renderer.hpp"
 
 namespace toast {
 class TOAST_API Engine {
@@ -21,5 +22,6 @@ protected:
   void Render();
   void Close();
   std::unique_ptr<interface::Window> m_window;
+  std::unique_ptr<renderer::OpenGL> m_renderer;
 };
 }
