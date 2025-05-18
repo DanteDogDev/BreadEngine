@@ -72,7 +72,7 @@ SpaceAfterTemplateKeyword: false
 SpaceAroundPointerQualifiers: Before
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeCaseColon: false
-SpaceBeforeCpp11BracedList: true
+SpaceBeforeCpp11BracedList: false # I CHANGED THIS
 SpaceBeforeCtorInitializerColon: true
 SpaceBeforeInheritanceColon: true
 SpaceBeforeJsonColon: false

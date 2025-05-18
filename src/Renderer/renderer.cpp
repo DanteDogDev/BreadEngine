@@ -1,6 +1,7 @@
 #include "renderer.hpp"
 
 #include "Interface/window-events.hpp"
+#include "Renderer/shader.hpp"
 #include "Utils/file.hpp"
 
 #include <Utils/log.hpp>
@@ -12,7 +13,7 @@
 
 namespace renderer {
 OpenGL::OpenGL(GLADloadfunc proc_addr) {
-  TOAST_INFO("Initializing OpenGL Renderer");
+  TOAST_INFO("Initializing OpenGL Renderer...");
 
   int gl_version = gladLoadGL(proc_addr);
   TOAST_ASSERT(gl_version, "Failed to load OpenGL version");
@@ -48,21 +49,43 @@ void OpenGL::Init() {
   };
   // NOLINTEND
 
-  glGenBuffers(1, &m_vertexBufferObj);
-  glGenVertexArrays(1, &m_vertexArrayObj);
+  // Makes a buffer and binds it to the VERTEX ARRAY BUFFER
+  glGenBuffers(1, &m_vbo);
+  glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 
-  glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObj);
-  glBindVertexArray(m_vertexArrayObj);
+  glGenVertexArrays(1, &m_vao);
+  glBindVertexArray(m_vao);
 
+  // TRIANGLE
   glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW);
 
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, nullptr);
+  // Describe how data is sent to the shader
+  const int pos_index = 0;
+  glEnableVertexAttribArray(pos_index);
+  glVertexAttribPointer(pos_index, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, nullptr);
 
-  const std::string vertex_code = LoadTextFile("shaders/default.vert");
-  const std::string fragment_code = LoadTextFile("shaders/default.frag");
+  glBindBuffer(GL_ARRAY_BUFFER,0);
+  // TRIANGLE
 
-  // RenderID program = glCreateProgram();
+  // SHADERS
+  m_shaderProgram = glCreateProgram();
+
+  const std::string vertex_code = utils::LoadTextFile("shaders/default.vert");
+  const std::string fragment_code = utils::LoadTextFile("shaders/default.frag");
+
+  RenderID vs = CompileShader(GL_VERTEX_SHADER, vertex_code);
+  RenderID fs = CompileShader(GL_FRAGMENT_SHADER, fragment_code);
+
+  glAttachShader(m_shaderProgram, vs);
+  glAttachShader(m_shaderProgram, fs);
+  glLinkProgram(m_shaderProgram);
+  glValidateProgram(m_shaderProgram);
+
+  glDeleteShader(vs);
+  glDeleteShader(fs);
+
+  glUseProgram(m_shaderProgram);
+  // SHADERS
 }
 
 bool OpenGL::Resize(event::FrameBufferResize* event) {
@@ -80,5 +103,7 @@ void OpenGL::RenderFrame() {
 
 void OpenGL::EndFrame() { }
 
-void OpenGL::Cleanup() { }
+void OpenGL::Cleanup() {  // NOLINT
+  glDeleteProgram(m_shaderProgram);
+}
 }

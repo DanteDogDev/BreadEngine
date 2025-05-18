@@ -28,7 +28,8 @@ public:
 
 private:
   event::Listener m_listener;
-  RenderID m_vertexBufferObj {};
-  RenderID m_vertexArrayObj {};
+  RenderID m_vbo{};
+  RenderID m_vao{};
+  RenderID m_shaderProgram{};
 };
 }

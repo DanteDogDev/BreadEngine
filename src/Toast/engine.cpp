@@ -10,6 +10,7 @@ namespace toast {
 
 void Engine::Run(int argc, char** argv) {
   Init();
+  TOAST_INFO("Running Engine...");
   while (!m_window->ShouldClose()) {
     event::EventSystem::PollEvents();
 

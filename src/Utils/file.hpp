@@ -6,4 +6,8 @@
 
 #pragma once
 
+namespace utils {
+
 std::string LoadTextFile(const std::string& path);
+
+}

@@ -8,5 +8,6 @@
 
 namespace renderer {
 
-  RenderID CompileShader(RenderID type, const std::string& source);
+RenderID CompileShader(RenderID type, const std::string& source);
+
 }
