@@ -28,7 +28,7 @@ public:
 
 private:
   event::Listener m_listener;
-  unsigned int m_vertexBufferObj {};
-  unsigned int m_vertexArrayObj {};
+  RenderID m_vertexBufferObj {};
+  RenderID m_vertexArrayObj {};
 };
 }

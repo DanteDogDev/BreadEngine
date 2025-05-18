@@ -1,6 +1,7 @@
 #include "renderer.hpp"
 
 #include "Interface/window-events.hpp"
+#include "Utils/file.hpp"
 
 #include <Utils/log.hpp>
 
@@ -57,6 +58,11 @@ void OpenGL::Init() {
 
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, nullptr);
+
+  const std::string vertex_code = LoadTextFile("shaders/default.vert");
+  const std::string fragment_code = LoadTextFile("shaders/default.frag");
+
+  // RenderID program = glCreateProgram();
 }
 
 bool OpenGL::Resize(event::FrameBufferResize* event) {
