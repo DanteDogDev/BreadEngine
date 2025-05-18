@@ -2,18 +2,16 @@
  * @file pch.h
  * @author Dante Harper
  * @date 16/05/25
- *
- * @brief [TODO: Brief description of the file's purpose]
  */
 
 #pragma once
 
 #include <any>
+#include <fstream>
 #include <functional>
 #include <iomanip>
 #include <map>
 #include <memory>
-#include <print>
 #include <queue>
 #include <ranges>
 #include <sstream>
@@ -22,7 +20,7 @@
 #include <type_traits>
 #include <typeindex>
 
-using std::print;
+using RenderID = unsigned int;
 
 #if defined(_WIN32) || defined(_WIN64)
 #define TOAST_API __declspec(dllexport)

@@ -14,7 +14,7 @@ add_executable(App
 target_precompile_headers(App PRIVATE ${PCH_DIR})
 target_include_directories(App PUBLIC ${GLOBAL_SRC})
 
-target_link_libraries(App PUBLIC 
+target_link_libraries(App PUBLIC
   Toast
   EventSystem
   Interface
