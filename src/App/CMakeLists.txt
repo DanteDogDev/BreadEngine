@@ -19,4 +19,5 @@ target_link_libraries(App PUBLIC
   EventSystem
   Interface
   Renderer
+  Utils
 )

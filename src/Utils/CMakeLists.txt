@@ -13,4 +13,5 @@ target_include_directories(Utils PUBLIC ${GLOBAL_SRC})
 
 target_link_libraries(Utils PUBLIC
   spdlog
+  TracyClient
 )

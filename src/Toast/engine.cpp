@@ -3,6 +3,7 @@
 #include "Interface/window.hpp"
 #include "Renderer/renderer.hpp"
 
+#include <tracy/Tracy.hpp>
 #include <EventSystem/eventSystem.hpp>
 #include <Utils/log.hpp>
 
@@ -12,6 +13,9 @@ void Engine::Run(int argc, char** argv) {
   Init();
   TOAST_INFO("Running Engine...");
   while (!m_window->ShouldClose()) {
+    FrameMark;
+    ZoneScopedN("Frame");
+
     event::EventSystem::PollEvents();
 
     Tick();

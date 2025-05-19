@@ -22,7 +22,7 @@ Window::Window(unsigned width, unsigned height, const std::string& name) {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
   m_glfwWindow = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
-  TOAST_ASSERT(!m_glfwWindow, "GLFW Error: Could not Create GLFW window");
+  TOAST_ASSERT(m_glfwWindow, "GLFW Error: Could not Create GLFW window");
   glfwMakeContextCurrent(m_glfwWindow);
 
   glfwSetWindowCloseCallback(m_glfwWindow, event::WindowClose::Callback);

@@ -25,9 +25,13 @@ target_include_directories(glad PUBLIC ${GLOBAL_INC}/glad/include)
 add_subdirectory(${GLOBAL_INC}/glfw)
 add_subdirectory(${GLOBAL_INC}/glm)
 add_subdirectory(${GLOBAL_INC}/spdlog)
+add_subdirectory(${GLOBAL_INC}/tracy)
 
 set_target_properties(spdlog PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set_target_properties(glad PROPERTIES POSITION_INDEPENDENT_CODE ON)
+set_target_properties(TracyClient PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+option(TRACY_ENABLE "" ON)
 
 add_subdirectory(${GLOBAL_SRC}/App)
 add_subdirectory(${GLOBAL_SRC}/Toast)

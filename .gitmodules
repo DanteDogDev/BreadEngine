@@ -7,3 +7,6 @@
 [submodule "inc/spdlog"]
 	path = inc/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "inc/tracy"]
+	path = inc/tracy
+	url = https://github.com/wolfpld/tracy.git
