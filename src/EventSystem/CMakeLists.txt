@@ -11,6 +11,6 @@ add_library(EventSystem SHARED ${SRC})
 target_precompile_headers(EventSystem PRIVATE ${PCH_DIR})
 target_include_directories(EventSystem PUBLIC ${GLOBAL_SRC})
 
-target_link_libraries(EventSystem PUBLIC
+target_link_libraries(EventSystem PRIVATE
   Utils
 )

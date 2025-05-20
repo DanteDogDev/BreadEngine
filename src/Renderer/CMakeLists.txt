@@ -15,7 +15,7 @@ target_include_directories(Renderer PUBLIC ${GLOBAL_SRC}/glad/include)
 
 find_package(OpenGL REQUIRED)
 
-target_link_libraries(Renderer PUBLIC
-  glad
+target_link_libraries(Renderer PRIVATE
   Utils
+  glad
 )

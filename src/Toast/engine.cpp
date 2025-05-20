@@ -13,7 +13,6 @@ void Engine::Run(int argc, char** argv) {
   Init();
   TOAST_INFO("Running Engine...");
   while (!m_window->ShouldClose()) {
-    FrameMark;
     ZoneScopedN("Frame");
 
     event::EventSystem::PollEvents();
@@ -22,6 +21,7 @@ void Engine::Run(int argc, char** argv) {
     Render();
 
     m_window->Tick();
+    FrameMark;
   }
   Close();
 }

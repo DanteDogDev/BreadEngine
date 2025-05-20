@@ -19,6 +19,11 @@ Window::Window(unsigned width, unsigned height, const std::string& name) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, OPENGL_MAJOR);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, OPENGL_MINOR);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
+  glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
+  glfwWindowHint(GLFW_FLOATING, GLFW_TRUE);
+
 
   m_glfwWindow = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
   TOAST_ASSERT(m_glfwWindow, "GLFW Error: Could not Create GLFW window");
