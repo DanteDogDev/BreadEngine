@@ -24,6 +24,8 @@ Window::Window(unsigned width, unsigned height, const std::string& name) {
   TOAST_ASSERT(m_glfwWindow, "GLFW Error: Could not Create GLFW window");
   glfwMakeContextCurrent(m_glfwWindow);
 
+  glfwSwapInterval(0);
+
   glfwSetWindowCloseCallback(m_glfwWindow, event::WindowClose::Callback);
   glfwSetWindowSizeCallback(m_glfwWindow, event::WindowResize::Callback);
   glfwSetFramebufferSizeCallback(m_glfwWindow, event::FrameBufferResize::Callback);
