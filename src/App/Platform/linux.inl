@@ -1,4 +1,4 @@
-#include "Toast/engine.hpp"
+#include <Toast/engine.h>
 
 int main(int argc, char** argv) {
   // Sets the .so path to ./modules

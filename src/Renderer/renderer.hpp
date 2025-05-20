@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "EventSystem/listener.hpp"
+#include <Utils/event-system.h>
 
 struct GLFWwindow;
 using GLADloadfunc = void (*(*)(const char* name))();

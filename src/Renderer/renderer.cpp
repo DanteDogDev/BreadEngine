@@ -1,10 +1,10 @@
 #include "renderer.hpp"
 
-#include "Interface/window-events.hpp"
-#include "Renderer/shader.hpp"
-#include "Utils/file.hpp"
+#include "shader.hpp"
 
-#include <Utils/log.hpp>
+#include <Interface/window.h>
+#include <Utils/file.h>
+#include <Utils/log.h>
 
 // clang-format off
 #include <glad/gl.h>
@@ -64,7 +64,7 @@ void OpenGL::Init() {
   glEnableVertexAttribArray(pos_index);
   glVertexAttribPointer(pos_index, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, nullptr);
 
-  glBindBuffer(GL_ARRAY_BUFFER,0);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
   // TRIANGLE
 
   // SHADERS
@@ -103,7 +103,7 @@ void OpenGL::RenderFrame() {
 
 void OpenGL::EndFrame() { }
 
-void OpenGL::Cleanup() {  // NOLINT
+void OpenGL::Cleanup() {    // NOLINT
   glDeleteProgram(m_shaderProgram);
 }
 }

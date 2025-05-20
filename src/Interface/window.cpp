@@ -3,7 +3,7 @@
 #include "window-events.hpp"
 
 #include <GLFW/glfw3.h>
-#include <Utils/log.hpp>
+#include <Utils/log.h>
 
 namespace interface {
 

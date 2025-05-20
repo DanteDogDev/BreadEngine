@@ -4,7 +4,7 @@
 /// @brief  Code that contains the listener of the Event System
 
 #pragma once
-#include <Utils/log.hpp>
+#include <Utils/log.h>
 
 namespace event {
 struct IEvent;

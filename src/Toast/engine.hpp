@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include "Interface/window.hpp"
-#include "Renderer/renderer.hpp"
+#include <Interface/window.h>
+#include <Renderer/renderer.h>
 
 namespace toast {
 class TOAST_API Engine {

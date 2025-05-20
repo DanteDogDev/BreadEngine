@@ -35,7 +35,6 @@ option(TRACY_ENABLE "" ON)
 
 add_subdirectory(${GLOBAL_SRC}/App)
 add_subdirectory(${GLOBAL_SRC}/Toast)
-add_subdirectory(${GLOBAL_SRC}/EventSystem)
 add_subdirectory(${GLOBAL_SRC}/Renderer)
 add_subdirectory(${GLOBAL_SRC}/Interface)
 add_subdirectory(${GLOBAL_SRC}/Utils)

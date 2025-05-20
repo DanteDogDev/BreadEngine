@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "EventSystem/event.hpp"
+#include <Utils/event-system.h>
 struct GLFWwindow;
 
 namespace event {

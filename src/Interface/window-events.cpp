@@ -1,6 +1,6 @@
 #include "window-events.hpp"
 
-#include "EventSystem/eventSystem.hpp"
+#include <Utils/event-system.h>
 
 namespace event {
 

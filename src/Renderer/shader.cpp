@@ -1,6 +1,6 @@
 #include "shader.hpp"
 
-#include "Utils/log.hpp"
+#include <Utils/log.h>
 
 // clang-format off
 #include <glad/gl.h>

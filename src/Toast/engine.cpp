@@ -1,11 +1,11 @@
 #include "engine.hpp"
 
-#include "Interface/window.hpp"
-#include "Renderer/renderer.hpp"
+#include <Interface/window.h>
+#include <Renderer/renderer.h>
 
 #include <tracy/Tracy.hpp>
-#include <EventSystem/eventSystem.hpp>
-#include <Utils/log.hpp>
+#include <Utils/event-system.h>
+#include <Utils/log.h>
 
 namespace toast {
 
