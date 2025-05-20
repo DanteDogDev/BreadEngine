@@ -1,6 +1,5 @@
 #include "window.hpp"
 
-#include "spdlog/fmt/bundled/base.h"
 #include "window-events.hpp"
 
 #include <GLFW/glfw3.h>
