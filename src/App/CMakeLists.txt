@@ -7,13 +7,9 @@ file(GLOB_RECURSE SRC CONFIGURE_DEPENDS
     "*.h"
 )
 
-add_executable(App
-    ${SRC}
-)
+add_executable(App ${SRC})
 
 target_precompile_headers(App PRIVATE ${PCH_DIR})
-target_include_directories(App PUBLIC ${GLOBAL_SRC})
-
 target_link_libraries(App PRIVATE
   Toast
 )
