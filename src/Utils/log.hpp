@@ -4,6 +4,7 @@
 /// @brief  The logger class is in charge of displaying messages to the console
 
 #pragma once
+
 #include <spdlog/spdlog.h>
 
 class TOAST_API Log {
@@ -51,13 +52,9 @@ private:
   }
 
 /// @def TOAST_ERROR(...)
-/// @brief Logs an error message from the engine logger and triggers a debug break.
+/// @brief Logs an error message from the engine logger
 /// @param ... The message to log.
-#define TOAST_ERROR(...)                  \
-  {                                       \
-    Log::GetEngine()->error(__VA_ARGS__); \
-    DEBUG_BREAK();                        \
-  }
+#define TOAST_ERROR(...) Log::GetEngine()->error(__VA_ARGS__);
 
 /// @def TOAST_WARN(...)
 /// @brief Logs a warning message from the engine logger.
@@ -91,13 +88,9 @@ private:
   }
 
 /// @def CLIENT_ERROR(...)
-/// @brief Logs an error message from the client logger and triggers a debug break.
+/// @brief Logs an error message from the client logger
 /// @param ... The message to log.
-#define CLIENT_ERROR(...)                 \
-  {                                       \
-    Log::GetClient()->error(__VA_ARGS__); \
-    DEBUG_BREAK();                        \
-  }
+#define CLIENT_ERROR(...) Log::GetClient()->error(__VA_ARGS__);
 
 /// @def CLIENT_WARN(...)
 /// @brief Logs a warning message from the client logger.
@@ -120,7 +113,25 @@ private:
 #ifdef NDEBUG
 #undef TOAST_ASSERT
 #undef CLIENT_ASSERT
-#define TOAST_ASSERT(condition, ...)    // Cast to void to discard the value and not give a warning
-(void)condition;
-#define CLIENT_ASSERT(condition, ...) (void)condition;
+#define TOAST_ASSERT(condition, ...) \
+  { (void)condition; }
+#define CLIENT_ASSERT(condition, ...) \
+  { (void)condition; }
 #endif
+
+/// @brief Base exception class
+///
+/// This is a exception that also logs as an error its content
+/// Use this instead of @c std::runtime_error for basic exception cases
+class ToastException : public std::exception {
+  std::string m_message;
+
+public:
+  ToastException(const std::string& message) : m_message(message) {
+    TOAST_ERROR("Exception: {0}", m_message);
+  }
+
+  const char* what() const noexcept override {
+    return m_message.c_str();
+  }
+};

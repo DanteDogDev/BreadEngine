@@ -15,8 +15,12 @@ for _, v in ipairs(arg) do
   args[v] = true
 end
 
-local do_generate = args["-g"] or next(args) == nil
-local do_build    = args["-b"] or next(args) == nil
+local do_release  = args["-r"] or false
+
+if do_release then
+  build_dir = "./bin/release"
+  build_type = "Release"
+end
 
 -- Function to run a command
 local function run_cmd(cmd)
@@ -36,17 +40,13 @@ end
 
 
 -- Generate step
-if do_generate then
-  print("\n=== Generating build system ===")
-  run_cmd(string.format(
-    'cmake -S . -B "%s" -G "%s" -DCMAKE_BUILD_TYPE=%s -DCMAKE_C_COMPILER=%s -DCMAKE_CXX_COMPILER=%s',
-    build_dir, generator, build_type, c_compiler, cpp_compiler
-  ))
-  copy_compile_commands()
-end
+print("\n=== Generating build system ===")
+run_cmd(string.format(
+  'cmake -S . -B "%s" -G "%s" -DCMAKE_BUILD_TYPE=%s -DCMAKE_C_COMPILER=%s -DCMAKE_CXX_COMPILER=%s',
+  build_dir, generator, build_type, c_compiler, cpp_compiler
+))
+copy_compile_commands()
 
 -- Build step
-if do_build then
-  print("\n=== Building project ===")
-  run_cmd(string.format('cmake --build "%s"', build_dir))
-end
+print("\n=== Building project ===")
+run_cmd(string.format('cmake --build "%s"', build_dir))

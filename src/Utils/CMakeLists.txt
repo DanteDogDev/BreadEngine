@@ -19,6 +19,5 @@ target_link_libraries(Utils PUBLIC
 set_target_properties(spdlog PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set_target_properties(TracyClient PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
-
 option(TRACY_ENABLE "" ON)
 option(TRACY_ON_DEMAND "" ON)
