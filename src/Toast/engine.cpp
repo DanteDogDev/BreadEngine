@@ -2,10 +2,9 @@
 
 #include <Interface/window.h>
 #include <Renderer/renderer.h>
-
-#include <tracy/Tracy.hpp>
 #include <Utils/event-system.h>
 #include <Utils/log.h>
+#include <tracy/Tracy.hpp>
 
 namespace toast {
 

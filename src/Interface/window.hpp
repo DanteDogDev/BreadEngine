@@ -25,7 +25,7 @@ public:
   [[nodiscard]]
   bool ShouldClose() const;
   [[nodiscard]]
-  std::pair<unsigned,unsigned> GetFrameBufferSize() const;
+  std::pair<unsigned, unsigned> GetFrameBufferSize() const;
 
   void Tick();
 
@@ -38,7 +38,7 @@ private:
   static constexpr int OPENGL_MAJOR = 4;
   static constexpr int OPENGL_MINOR = 6;
 
-  void HandleInput() const; // GET RID OF LATER
+  void HandleInput() const;    // GET RID OF LATER
   static void ErrorCallback(int error, const char* description);
 };
 

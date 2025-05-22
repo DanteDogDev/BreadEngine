@@ -44,7 +44,7 @@ struct FrameBufferResize : Event<FrameBufferResize> {
 struct WindowContentResize : Event<WindowContentResize> {
   WindowContentResize(GLFWwindow* window, float x_scale, float y_scale) : window(window), xScale(x_scale), yScale(y_scale) { }
 
-  GLFWwindow* window {};
+  GLFWwindow* window{};
   float xScale;
   float yScale;
 
@@ -54,7 +54,7 @@ struct WindowContentResize : Event<WindowContentResize> {
 struct WindowPosition : Event<WindowPosition> {
   WindowPosition(GLFWwindow* window, int x_pos, int y_pos) : window(window), xPos(x_pos), yPos(y_pos) { }
 
-  GLFWwindow* window {};
+  GLFWwindow* window{};
   int xPos;
   int yPos;
 
@@ -64,7 +64,7 @@ struct WindowPosition : Event<WindowPosition> {
 struct WindowMinimized : Event<WindowMinimized> {
   WindowMinimized(GLFWwindow* window, bool minimized) : window(window), minimized(minimized) { }
 
-  GLFWwindow* window {};
+  GLFWwindow* window{};
   bool minimized;
 
   static void Callback(GLFWwindow* window, int minimized);
@@ -73,7 +73,7 @@ struct WindowMinimized : Event<WindowMinimized> {
 struct WindowMaximized : Event<WindowMaximized> {
   WindowMaximized(GLFWwindow* window, bool maximized) : window(window), maximized(maximized) { }
 
-  GLFWwindow* window {};
+  GLFWwindow* window{};
   bool maximized;
 
   static void Callback(GLFWwindow* window, int maximized);
@@ -82,7 +82,7 @@ struct WindowMaximized : Event<WindowMaximized> {
 struct WindowFocused : Event<WindowFocused> {
   WindowFocused(GLFWwindow* window, bool focused) : window(window), focused(focused) { }
 
-  GLFWwindow* window {};
+  GLFWwindow* window{};
   bool focused;
 
   static void Callback(GLFWwindow* window, int focused);
@@ -110,7 +110,7 @@ struct KeyboardChar : Event<KeyboardChar> {
 struct MousePosition : Event<WindowPosition> {
   MousePosition(GLFWwindow* window, double x_pos, double y_pos) : window(window), xPos(x_pos), yPos(y_pos) { }
 
-  GLFWwindow* window {};
+  GLFWwindow* window{};
   double xPos;
   double yPos;
 
@@ -120,7 +120,7 @@ struct MousePosition : Event<WindowPosition> {
 struct MouseEntered : Event<MouseEntered> {
   MouseEntered(GLFWwindow* window, bool entered) : window(window), entered(entered) { }
 
-  GLFWwindow* window {};
+  GLFWwindow* window{};
   bool entered;
 
   static void Callback(GLFWwindow* window, int entered);
@@ -129,7 +129,7 @@ struct MouseEntered : Event<MouseEntered> {
 struct MouseButton : Event<MouseButton> {
   MouseButton(GLFWwindow* window, int button, int action, int mods) : window(window), button(button), action(action), mods(mods) { }
 
-  GLFWwindow* window {};
+  GLFWwindow* window{};
   int button;
   int action;
   int mods;
@@ -140,7 +140,7 @@ struct MouseButton : Event<MouseButton> {
 struct MouseScroll : Event<MouseScroll> {
   MouseScroll(GLFWwindow* window, double x_offset, double y_offset) : window(window), xOffset(x_offset), yOffset(y_offset) { }
 
-  GLFWwindow* window {};
+  GLFWwindow* window{};
   double xOffset;
   double yOffset;
 

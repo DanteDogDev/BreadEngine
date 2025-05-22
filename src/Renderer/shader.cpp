@@ -14,7 +14,7 @@ RenderID CompileShader(RenderID type, const std::string& source) {
   glShaderSource(id, 1, &src, nullptr);
   glCompileShader(id);
   // ERROR HANDLING HERE
-  int compiled {};
+  int compiled{};
   glGetShaderiv(id, GL_COMPILE_STATUS, &compiled);
   if (!compiled) {
     int log_length = 0;

@@ -24,7 +24,6 @@ Window::Window(unsigned width, unsigned height, const std::string& name) {
   glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
   glfwWindowHint(GLFW_FLOATING, GLFW_TRUE);
 
-
   m_glfwWindow = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
   TOAST_ASSERT(m_glfwWindow, "GLFW Error: Could not Create GLFW window");
   glfwMakeContextCurrent(m_glfwWindow);

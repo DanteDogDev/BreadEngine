@@ -6,19 +6,27 @@
 
 #pragma once
 
-#include <any>
+///
+#include <algorithm>
+#include <exception>
+#include <filesystem>
 #include <fstream>
 #include <functional>
-#include <iomanip>
-#include <map>
 #include <memory>
-#include <queue>
 #include <ranges>
 #include <sstream>
 #include <stdexcept>
+///
+#include <array>
+#include <deque>
+#include <list>
+#include <map>
+#include <queue>
+#include <stack>
 #include <string>
-#include <type_traits>
-#include <typeindex>
+#include <unordered_map>
+#include <vector>
+///
 
 using RenderID = unsigned int;
 

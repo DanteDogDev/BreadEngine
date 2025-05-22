@@ -8,5 +8,5 @@
 
 #pragma once
 
-#include "../../window.hpp"
 #include "../../window-events.hpp"
+#include "../../window.hpp"

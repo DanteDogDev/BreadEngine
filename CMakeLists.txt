@@ -14,26 +14,10 @@ set(OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR}/modules)
 
-# GLFW
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-
-add_library(glad STATIC ${GLOBAL_INC}/glad/src/gl.c)
-target_include_directories(glad PUBLIC ${GLOBAL_INC}/glad/include)
-
-
 add_subdirectory(${GLOBAL_INC}/glfw)
 add_subdirectory(${GLOBAL_INC}/glm)
 add_subdirectory(${GLOBAL_INC}/spdlog)
 add_subdirectory(${GLOBAL_INC}/tracy)
-
-set_target_properties(spdlog PROPERTIES POSITION_INDEPENDENT_CODE ON)
-set_target_properties(glad PROPERTIES POSITION_INDEPENDENT_CODE ON)
-set_target_properties(TracyClient PROPERTIES POSITION_INDEPENDENT_CODE ON)
-
-option(TRACY_ENABLE "" ON)
-option(TRACY_ON_DEMAND "" ON)
 
 add_subdirectory(${GLOBAL_SRC}/App)
 add_subdirectory(${GLOBAL_SRC}/Toast)

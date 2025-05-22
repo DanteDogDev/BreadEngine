@@ -5,6 +5,9 @@
 
 #pragma once
 #include <Utils/log.h>
+#include <any>
+#include <type_traits>
+#include <typeindex>
 
 namespace event {
 struct IEvent;

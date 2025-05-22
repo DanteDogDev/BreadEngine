@@ -25,12 +25,12 @@ void Log::Init(spdlog::level::level_enum level) {
   file_sink->set_pattern("[%Y-%m-%d %T.%e] [%l] [%n] %v");
 
   // Create engine logger
-  m_engineLogger = std::make_shared<spdlog::logger>("TOAST", spdlog::sinks_init_list { console_sink, file_sink });
+  m_engineLogger = std::make_shared<spdlog::logger>("TOAST", spdlog::sinks_init_list{ console_sink, file_sink });
   m_engineLogger->set_level(level);
   spdlog::register_logger(m_engineLogger);
 
   // Create client logger
-  m_clientLogger = std::make_shared<spdlog::logger>("GAME", spdlog::sinks_init_list { console_sink, file_sink });
+  m_clientLogger = std::make_shared<spdlog::logger>("GAME", spdlog::sinks_init_list{ console_sink, file_sink });
   m_clientLogger->set_level(level);
   spdlog::register_logger(m_clientLogger);
 }
