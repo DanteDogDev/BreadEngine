@@ -2,8 +2,7 @@
 
 #include <Interface/window.h>
 #include <Renderer/renderer.h>
-#include <Utils/event-system.h>
-#include <Utils/log.h>
+#include <Utils/utils.h>
 #include <tracy/Tracy.hpp>
 
 namespace toast {
@@ -26,6 +25,7 @@ void Engine::Run(int argc, char** argv) {
 }
 
 void Engine::Init() {
+  Time::Init();
   Log::Init(spdlog::level::info);
   TOAST_INFO("Initializing Toast Engine...");
 
@@ -44,5 +44,6 @@ void Engine::Render() {
 
 void Engine::Close() {
   m_window.reset();
+  TOAST_INFO("Engine Uptime: {}", Time::Get().Uptime());
 }
 }

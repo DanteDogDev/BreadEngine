@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include "defines.hpp"
+
 namespace renderer {
 
 class ShaderProgram {

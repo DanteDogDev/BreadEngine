@@ -1,7 +1,9 @@
 #version 330 core
 out vec4 color;
 
+uniform vec4 u_Color;
+
 void main()
 {
-    color = vec4(0.9, 0.5, 0.6, 1.0); // Redish
+    color = u_Color;
 }

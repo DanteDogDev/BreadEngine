@@ -8,3 +8,4 @@
 
 #include "../../renderer.hpp"
 #include "../../shader.hpp"
+#include "../../defines.hpp"

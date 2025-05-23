@@ -2,6 +2,7 @@
 
 #include <Utils/file.h>
 #include <Utils/log.h>
+#include <Utils/time.h>
 
 // clang-format off
 #include <glad/gl.h>
@@ -43,6 +44,10 @@ ShaderProgram::~ShaderProgram() {
 
 void ShaderProgram::BindShader() const {
   glUseProgram(m_shaderProgramId);
+
+  int location = glGetUniformLocation(m_shaderProgramId,"u_Color");
+  TOAST_ASSERT(location != -1,"OpenGL Error: Uniform Location Not Found");
+  glUniform4f(location,sin(Time::Get().Uptime()), cos(Time::Get().Uptime()), sin(Time::Get().Uptime()), 1.0);
 }
 
 }

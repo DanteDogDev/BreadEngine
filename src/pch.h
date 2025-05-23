@@ -28,14 +28,14 @@
 #include <vector>
 ///
 
-using RenderID = unsigned int;
-
 #if defined(_WIN32) || defined(_WIN64)
 #define TOAST_API __declspec(dllexport)
 #elif defined(__linux__)
 #define TOAST_API __attribute__((visibility("default")))
 #elif defined(__APPLE__)
 #define TOAST_API __attribute__((visibility("default")))
+#elif
+#define TOAST_API
 #endif
 
 #if defined(_MSC_VER)
