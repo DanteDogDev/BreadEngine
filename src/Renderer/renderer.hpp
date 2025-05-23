@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include "shader.hpp"
 #include <Utils/event-system.h>
 
 struct GLFWwindow;
@@ -30,6 +31,6 @@ private:
   event::Listener m_listener;
   RenderID m_vbo{};
   RenderID m_vao{};
-  RenderID m_shaderProgram{};
+  ShaderProgram *m_shaderProgram;
 };
 }

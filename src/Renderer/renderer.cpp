@@ -68,24 +68,9 @@ void OpenGL::Init() {
   // TRIANGLE
 
   // SHADERS
-  m_shaderProgram = glCreateProgram();
 
-  const std::string vertex_code = utils::LoadTextFile("shaders/default.vert");
-  const std::string fragment_code = utils::LoadTextFile("shaders/default.frag");
-
-  RenderID vs = CompileShader(GL_VERTEX_SHADER, vertex_code);
-  RenderID fs = CompileShader(GL_FRAGMENT_SHADER, fragment_code);
-
-  glAttachShader(m_shaderProgram, vs);
-  glAttachShader(m_shaderProgram, fs);
-  glLinkProgram(m_shaderProgram);
-  glValidateProgram(m_shaderProgram);
-
-  glDeleteShader(vs);
-  glDeleteShader(fs);
-
-  glUseProgram(m_shaderProgram);
-  // SHADERS
+  m_shaderProgram = new ShaderProgram("shaders/default.vert", "shaders/default.frag");
+  m_shaderProgram->BindShader();
 }
 
 bool OpenGL::Resize(event::FrameBufferResize* event) {
@@ -103,7 +88,7 @@ void OpenGL::RenderFrame() {
 
 void OpenGL::EndFrame() { }
 
-void OpenGL::Cleanup() {    // NOLINT
-  glDeleteProgram(m_shaderProgram);
+void OpenGL::Cleanup() {
+  delete m_shaderProgram;
 }
 }

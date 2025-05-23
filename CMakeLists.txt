@@ -14,6 +14,10 @@ set(OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR}/modules)
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  add_compile_definitions(DEBUG)
+endif()
+
 add_subdirectory(${GLOBAL_INC}/glfw)
 add_subdirectory(${GLOBAL_INC}/glm)
 add_subdirectory(${GLOBAL_INC}/spdlog)
