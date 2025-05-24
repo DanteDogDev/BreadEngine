@@ -52,41 +52,31 @@ void OpenGL::Init() {
   };
   // NOLINTEND
 
-  {    // Setting up buffers and binding the,
-    glGenVertexArrays(1, &m_vao);
-    glBindVertexArray(m_vao);
-
-    glGenBuffers(1, &m_vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-
-    glGenBuffers(1, &m_ebo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
+  {    // Creating Buffers
+    glCreateVertexArrays(1, &m_vao);
+    glCreateBuffers(1, &m_vbo);
+    glCreateBuffers(1, &m_ebo);
   }
 
-  {    // Binding Buffer Data
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+  {    // Binding Data to the buffers
+    glNamedBufferData(m_vbo, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glNamedBufferData(m_ebo, sizeof(indices), indices, GL_STATIC_DRAW);
   }
 
-  {    // Describing Vertex Layout
-    const int pos_index = 0;
-    glEnableVertexAttribArray(pos_index);
-    glVertexAttribPointer(pos_index, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, nullptr);
+  {    // Binding Buffers the the vao and describing their layout
+    const unsigned attrib_index = 0;
+    const unsigned binding_index = 0;
+    // binds the vbo data to the binding index
+    glVertexArrayVertexBuffer(m_vao, binding_index, m_vbo, 0, sizeof(float) * 3);
+    // formats the a attribute according to the vbo
+    glEnableVertexArrayAttrib(m_vao, attrib_index);
+    glVertexArrayAttribFormat(m_vao, attrib_index, 3, GL_FLOAT, GL_FALSE, 0);
+    // Binds the data coming from the vbo and puts it onto the shader at the attrib_index
+    glVertexArrayAttribBinding(m_vao, attrib_index, binding_index);
+    glVertexArrayElementBuffer(m_vao, m_ebo);
   }
-
-  { // Unbind Everything
-    glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-  }
-
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-  // TRIANGLE
-
-  // SHADERS
 
   m_shaderProgram = new ShaderProgram("shaders/default.vert", "shaders/default.frag");
-  m_shaderProgram->BindShader();
 }
 
 bool OpenGL::Resize(event::FrameBufferResize* event) {
@@ -101,13 +91,16 @@ void OpenGL::BeginFrame() {
 void OpenGL::RenderFrame() {
   m_shaderProgram->BindShader();
   glBindVertexArray(m_vao);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
+  // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 }
 
 void OpenGL::EndFrame() { }
 
 void OpenGL::Cleanup() {
+  glDeleteVertexArrays(1, &m_vao);
+  glDeleteBuffers(1, &m_vbo);
+  glDeleteBuffers(1, &m_ebo);
   delete m_shaderProgram;
 }
 }

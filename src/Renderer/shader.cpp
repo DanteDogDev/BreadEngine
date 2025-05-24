@@ -45,9 +45,11 @@ ShaderProgram::~ShaderProgram() {
 void ShaderProgram::BindShader() const {
   glUseProgram(m_shaderProgramId);
 
-  int location = glGetUniformLocation(m_shaderProgramId,"u_Color");
+  int location = glGetUniformLocation(m_shaderProgramId,"u_Color"); // HACK: SHOULD ONLY DO THIS ONCE IN CONSTRUCTOR
   TOAST_ASSERT(location != -1,"OpenGL Error: Uniform Location Not Found");
-  glUniform4f(location,sin(Time::Get().Uptime()), cos(Time::Get().Uptime()), sin(Time::Get().Uptime()), 1.0);
+
+  double time = Time::Get().Uptime();
+  glUniform4f(location,sin(time*2), cos(time*.5), sin(time*3), 1.0);
 }
 
 }
