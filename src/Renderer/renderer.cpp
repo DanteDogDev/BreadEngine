@@ -26,6 +26,7 @@ OpenGL::OpenGL(GLADloadfunc proc_addr) {
 
 void OpenGL::Init() {
   glEnable(GL_DEBUG_OUTPUT);
+  glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
   glDebugMessageCallback(
       [](GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* user_param) {
         switch (severity) {
@@ -41,14 +42,14 @@ void OpenGL::Init() {
 
   // NOLINTBEGIN
   float vertices[] = {
-    -0.5f, -0.5f, 0.0f,    // bottom-left  // 0
-    0.5f,  -0.5f, 0.0f,    // bottom-right // 1
-    0.5f,  0.5f,  0.0f,    // top-right    // 2
-    -0.5f, 0.5f,  0.0f,    // top-left     // 3
+    -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,    // bottom-left  // 0
+    0.5f,  -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,    // bottom-right // 1
+    0.5f,  0.5f,  0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,    // top-right    // 2
+    -0.5f, 0.5f,  0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f     // top-left     // 3
   };
   unsigned int indices[] = {
     0, 1, 2,    //
-    2, 3, 0,    //
+    0, 2, 3,    //
   };
   // NOLINTEND
 
@@ -64,16 +65,21 @@ void OpenGL::Init() {
   }
 
   {    // Binding Buffers the the vao and describing their layout
-    const unsigned attrib_index = 0;
-    const unsigned binding_index = 0;
     // binds the vbo data to the binding index
-    glVertexArrayVertexBuffer(m_vao, binding_index, m_vbo, 0, sizeof(float) * 3);
-    // formats the a attribute according to the vbo
-    glEnableVertexArrayAttrib(m_vao, attrib_index);
-    glVertexArrayAttribFormat(m_vao, attrib_index, 3, GL_FLOAT, GL_FALSE, 0);
-    // Binds the data coming from the vbo and puts it onto the shader at the attrib_index
-    glVertexArrayAttribBinding(m_vao, attrib_index, binding_index);
+    glVertexArrayVertexBuffer(m_vao, 0, m_vbo, 0, sizeof(float) * 9);
     glVertexArrayElementBuffer(m_vao, m_ebo);
+    // formats the a attribute according to the vbo
+    glEnableVertexArrayAttrib(m_vao, 0);
+    glEnableVertexArrayAttrib(m_vao, 1);
+    glEnableVertexArrayAttrib(m_vao, 2);
+    //
+    glVertexArrayAttribFormat(m_vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
+    glVertexArrayAttribFormat(m_vao, 1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 3);
+    glVertexArrayAttribFormat(m_vao, 2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 7);
+    // Binds the data coming from the vbo and puts it onto the shader at the attrib_index
+    glVertexArrayAttribBinding(m_vao, 0, 0);
+    glVertexArrayAttribBinding(m_vao, 1, 0);
+    glVertexArrayAttribBinding(m_vao, 2, 0);
   }
 
   m_shaderProgram = new ShaderProgram("shaders/default.vert", "shaders/default.frag");
@@ -91,7 +97,6 @@ void OpenGL::BeginFrame() {
 void OpenGL::RenderFrame() {
   m_shaderProgram->BindShader();
   glBindVertexArray(m_vao);
-  // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 }
 
