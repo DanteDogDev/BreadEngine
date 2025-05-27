@@ -1,14 +1,12 @@
 /**
- * @file entrypoint.hpp
+ * @file entrypoint.h
  * @author Dante Harper
  * @date 17/05/25
- *
- * @brief [TODO: Brief description of the file's purpose]
  */
 
 #if defined(__linux__)
 
-#include "Platform/linux.inl"
+#include "../../Platform/linux.inl"
 
 #else
 

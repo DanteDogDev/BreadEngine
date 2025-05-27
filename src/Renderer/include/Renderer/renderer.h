@@ -6,6 +6,6 @@
 
 #pragma once
 
+#include "../../defines.hpp"
 #include "../../renderer.hpp"
 #include "../../shader.hpp"
-#include "../../defines.hpp"
